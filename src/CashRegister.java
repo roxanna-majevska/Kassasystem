@@ -24,12 +24,26 @@ public class CashRegister implements ActionListener {
     
     JFrame frame;
     JTextArea receipt;
-    JButton kaffeButton;
-    JButton nalleButton;
-    JButton muggButton;
+
+    JButton coffeeButton;
+    JButton sugarButton;
+    JButton flourButton;
     JButton chipsButton;
-    JButton vaniljYoghurtButton;
-    JButton daimButton;
+    JButton milkButton;
+    JButton butterButton;
+    JButton pepsiButton;
+    JButton fantaButton;
+
+    Produkt coffee;
+    Produkt sugar;
+    Produkt flour;
+    Produkt chips;
+    Produkt milk;
+    Produkt butter;
+    Produkt pepsi;
+    Produkt fanta;
+
+
     JTextArea inputProductName;
     JTextArea inputCount;
     JButton addToReceiptButton;
@@ -37,7 +51,17 @@ public class CashRegister implements ActionListener {
 
 
     public CashRegister(){
-        frame = new JFrame("IOT24 POS");
+        frame = new JFrame("KASSASYSTEM");
+
+        coffee = new Produkt("Kaffe", 67.50);
+        sugar = new Produkt("Socker", 21.99);
+        flour = new Produkt("Mjöl", 23.50);
+        chips = new Produkt("Chips", 32.79);
+        milk = new Produkt("Mjölk", 19.99);
+        butter = new Produkt("Smör", 47.50);
+        pepsi = new Produkt("Pepsi", 17.50);
+        fanta = new Produkt("Fanta", 18.50);
+
 
 
         createReceiptArea();
@@ -93,24 +117,29 @@ public class CashRegister implements ActionListener {
         panel.setBackground(Color.green);
         panel.setPreferredSize(new Dimension(600, 600));
 
-        kaffeButton = new JButton("Kaffe");
-        panel.add(kaffeButton);
+        coffeeButton = new JButton("Kaffe");
+        panel.add(coffeeButton);
 
-        nalleButton = new JButton("Nalle");
-        panel.add(nalleButton);
+        sugarButton = new JButton("Socker");
+        panel.add(sugarButton);
 
-        muggButton = new JButton("Mugg");
-        panel.add(muggButton);
+        flourButton = new JButton("Mjöl");
+        panel.add(flourButton);
 
         chipsButton = new JButton("Chips");
         panel.add(chipsButton);
 
-        vaniljYoghurtButton = new JButton("Yoghurt");
-        panel.add(vaniljYoghurtButton);
-        
+        milkButton = new JButton("Mjölk");
+        panel.add(milkButton);
 
-        daimButton = new JButton("Daim");
-        panel.add(daimButton);
+        butterButton = new JButton("Smör");
+        panel.add(butterButton);
+
+        pepsiButton = new JButton("Pepsi");
+        panel.add(pepsiButton);
+
+        fantaButton = new JButton("Fanta");
+        panel.add(fantaButton);
 
 
 
