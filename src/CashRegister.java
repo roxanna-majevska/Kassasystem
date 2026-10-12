@@ -38,6 +38,9 @@ public class CashRegister implements ActionListener {
 
     Produkt selectedProduct;
 
+    double totalSum;
+    boolean receiptIsPaid = false;
+
     JTextArea inputProductName;
     JTextArea inputCount;
     JButton addToReceiptButton;
@@ -66,9 +69,11 @@ public class CashRegister implements ActionListener {
         butterButton.addActionListener(this);
         pepsiButton.addActionListener(this);
         fantaButton.addActionListener(this);
-        createAddArea();
 
-        addToReceiptButton.addActionListener(this);
+        createAddArea();                               // 1. Add och Pay skapas här.
+        addToReceiptButton.addActionListener(this); // 2. Sen får Add lyssna
+        payButton.addActionListener(this);          // 3. och pay får lyssna
+
 
 
         frame.getContentPane().setBackground(Color.BLACK);
@@ -206,14 +211,29 @@ public class CashRegister implements ActionListener {
             inputProductName.setText(fanta.getProductName());
             selectedProduct = fanta;
         } else if (e.getSource() == addToReceiptButton) {
+            if (receiptIsPaid) {
+                receipt.setText("");
+                receiptIsPaid = false;                                           //8. Kvittot töms, redo för nästa köp (Add-grenen)
+            }
             try {
                 int count = Integer.parseInt(inputCount.getText());              //1. Antalet
                 double sum = selectedProduct.getProductPrice() * count;          //2. Summan
-                receipt.append(String.format("%-20s %2d * %7.2f = %7.2f\n",selectedProduct.getProductName(), count, selectedProduct.getProductPrice(), sum));    //3. Sriver ut raden
+                totalSum = totalSum + sum;                                       //3. Totalen
+                receipt.append(String.format("%-20s %2d * %7.2f = %7.2f\n",selectedProduct.getProductName(), count, selectedProduct.getProductPrice(), sum));    //4. Skriver ut produktraden
 
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(frame, "Skriv in heltal!");
             }
+        } else if (e.getSource() == payButton) {
+            receipt.append(String.format("Total: %7.2f\n", totalSum));         //5.  Skriver ut totalen
+            receipt.append("TACK FÖR DITT KÖP!\n");
+            receipt.append("VÄLKOMMEN ÅTER!\n");
+            totalSum  = 0;                                                    //6. Nollställer
+            receiptIsPaid = true;                                             //7. Kunden har betalat (Pay-grenen)
+
+
+
+
         }
     }
 }
