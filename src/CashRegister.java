@@ -215,12 +215,15 @@ public class CashRegister implements ActionListener {
                 receipt.setText("");
                 receiptIsPaid = false;                                           //8. Kvittot töms, redo för nästa köp (Add-grenen)
             }
-            try {
+            if (selectedProduct == null) {
+                JOptionPane.showMessageDialog(frame, "Vänligen välj en produkt först!");
+                return;         // går ur actionPerformed, kör inget mer
+            }
+            try {       //  hit kommer bara om hyllan har en produkt
                 int count = Integer.parseInt(inputCount.getText());              //1. Antalet
                 double sum = selectedProduct.getProductPrice() * count;          //2. Summan
                 totalSum = totalSum + sum;                                       //3. Totalen
-                receipt.append(String.format("%-20s %2d * %7.2f = %7.2f\n",selectedProduct.getProductName(), count, selectedProduct.getProductPrice(), sum));    //4. Skriver ut produktraden
-
+                receipt.append(String.format("%-20s %2d * %7.2f = %7.2f\n",selectedProduct.getProductName(), count, selectedProduct.getProductPrice(), sum));    //4. Skriver ut produkten
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(frame, "Skriv in heltal!");
             }
@@ -230,10 +233,6 @@ public class CashRegister implements ActionListener {
             receipt.append("VÄLKOMMEN ÅTER!\n");
             totalSum  = 0;                                                    //6. Nollställer
             receiptIsPaid = true;                                             //7. Kunden har betalat (Pay-grenen)
-
-
-
-
         }
     }
 }
