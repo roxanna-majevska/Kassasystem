@@ -10,10 +10,7 @@ import java.io.InputStream;
 import javax.swing.*;
 import java.awt.event.*;
 
-
-
 public class CashRegister implements ActionListener {
-
 
     JFrame frame;
     JTextArea receipt;
@@ -46,18 +43,17 @@ public class CashRegister implements ActionListener {
     JButton addToReceiptButton;
     JButton payButton;
 
-
     public CashRegister(){
         frame = new JFrame("KASSASYSTEM");
 
-        coffee = new Produkt("Kaffe", 67.50);
-        sugar = new Produkt("Socker", 21.99);
-        flour = new Produkt("Mjöl", 23.50);
-        chips = new Produkt("Chips", 32.79);
-        milk = new Produkt("Mjölk", 19.99);
-        butter = new Produkt("Smör", 47.50);
-        pepsi = new Produkt("Pepsi", 17.50);
-        fanta = new Produkt("Fanta", 18.50);
+        coffee = new Produkt("Kaffe", 67.50, 25);
+        sugar = new Produkt("Socker", 21.99, 25);
+        flour = new Produkt("Mjöl", 23.50, 12);
+        chips = new Produkt("Chips", 32.79, 25);
+        milk = new Produkt("Mjölk", 19.99, 12);
+        butter = new Produkt("Smör", 47.50, 12);
+        pepsi = new Produkt("Pepsi", 17.50, 25);
+        fanta = new Produkt("Fanta", 18.50, 25);
         createReceiptArea();
 
         createQuickButtonsArea();
@@ -75,7 +71,6 @@ public class CashRegister implements ActionListener {
         payButton.addActionListener(this);          // 3. och pay får lyssna
 
 
-
         frame.getContentPane().setBackground(Color.BLACK);
         frame.setSize(1000,800);
 
@@ -84,8 +79,6 @@ public class CashRegister implements ActionListener {
         frame.setLayout(null);
 
         frame.setVisible(true);
-
-
     }
 
     private void createAddArea(){
@@ -104,19 +97,15 @@ public class CashRegister implements ActionListener {
         inputCount.setFont(new Font("Arial Black", Font.BOLD, 18));
         frame.add(inputCount);
 
-
         addToReceiptButton = new JButton("Add");
         addToReceiptButton.setBounds(400,640,70,50);
         addToReceiptButton.setFont(new Font("Arial Black", Font.PLAIN, 14));
         frame.add(addToReceiptButton);
 
-
         payButton = new JButton("Pay");
         payButton.setBounds(480,640,70,50);
         payButton.setFont(new Font("Arial Black", Font.PLAIN, 14));
         frame.add(payButton);
-
-
     }
 
     private void createQuickButtonsArea() {
@@ -142,9 +131,6 @@ public class CashRegister implements ActionListener {
         fantaButton = new JButton("Fanta");
         panel.add(fantaButton);
 
-
-
-
         panel.setBounds(0, 0, 600, 600);
 
         frame.add(panel);
@@ -168,9 +154,6 @@ public class CashRegister implements ActionListener {
 
     public void run(){
 
-
-
-
     /*     receipt.append("                     STEFANS SUPERSHOP\n");
         receipt.append("----------------------------------------------------\n");
         receipt.append("\n");
@@ -181,7 +164,6 @@ public class CashRegister implements ActionListener {
         receipt.append("Total                                        ------\n");
         receipt.append("                                             306.00\n");
         receipt.append("TACK FÖR DITT KÖP\n");*/
-
     }
 
     @Override
