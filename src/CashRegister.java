@@ -14,7 +14,7 @@ import java.awt.event.*;
 
 public class CashRegister implements ActionListener {
 
-    
+
     JFrame frame;
     JTextArea receipt;
 
@@ -36,6 +36,7 @@ public class CashRegister implements ActionListener {
     Produkt pepsi;
     Produkt fanta;
 
+    Produkt selectedProduct;
 
     JTextArea inputProductName;
     JTextArea inputCount;
@@ -54,7 +55,6 @@ public class CashRegister implements ActionListener {
         butter = new Produkt("Smör", 47.50);
         pepsi = new Produkt("Pepsi", 17.50);
         fanta = new Produkt("Fanta", 18.50);
-
         createReceiptArea();
 
         createQuickButtonsArea();
@@ -67,18 +67,19 @@ public class CashRegister implements ActionListener {
         pepsiButton.addActionListener(this);
         fantaButton.addActionListener(this);
         createAddArea();
+
         addToReceiptButton.addActionListener(this);
 
 
         frame.getContentPane().setBackground(Color.BLACK);
-        frame.setSize(1000,800); 
+        frame.setSize(1000,800);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.setLayout(null);
-    
-        frame.setVisible(true);        
-            
+
+        frame.setVisible(true);
+
 
     }
 
@@ -146,7 +147,7 @@ public class CashRegister implements ActionListener {
 
     private void createReceiptArea() {
         receipt = new JTextArea();
-        receipt.setSize(400,400); 
+        receipt.setSize(400,400);
         receipt.setLineWrap(true);
         receipt.setEditable(false);
         receipt.setVisible(true);
@@ -157,7 +158,7 @@ public class CashRegister implements ActionListener {
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scroll.setBounds(600, 0, 400, 1000);
 
-        frame.add(scroll);    
+        frame.add(scroll);
     }
 
     public void run(){
@@ -165,7 +166,7 @@ public class CashRegister implements ActionListener {
 
 
 
-   /*     receipt.append("                     STEFANS SUPERSHOP\n");
+    /*     receipt.append("                     STEFANS SUPERSHOP\n");
         receipt.append("----------------------------------------------------\n");
         receipt.append("\n");
         receipt.append("Kvittonummer: 122        Datum: 2024-09-01 13:00:21\n");
@@ -176,30 +177,40 @@ public class CashRegister implements ActionListener {
         receipt.append("                                             306.00\n");
         receipt.append("TACK FÖR DITT KÖP\n");*/
 
-    }            
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == coffeeButton) {
             inputProductName.setText(coffee.getProductName());
+            selectedProduct = coffee;
         } else if (e.getSource() == sugarButton) {
             inputProductName.setText(sugar.getProductName());
+            selectedProduct = sugar;
         } else if (e.getSource() == flourButton) {
             inputProductName.setText(flour.getProductName());
+            selectedProduct = flour;
         } else if (e.getSource() == chipsButton) {
             inputProductName.setText(chips.getProductName());
+            selectedProduct = chips;
         } else if (e.getSource() == milkButton) {
             inputProductName.setText(milk.getProductName());
+            selectedProduct = milk;
         } else if (e.getSource() == butterButton) {
             inputProductName.setText(butter.getProductName());
+            selectedProduct = butter;
         } else if (e.getSource() == pepsiButton) {
             inputProductName.setText(pepsi.getProductName());
+            selectedProduct = pepsi;
         } else if (e.getSource() == fantaButton) {
             inputProductName.setText(fanta.getProductName());
+            selectedProduct = fanta;
         } else if (e.getSource() == addToReceiptButton) {
             try {
-                int count = Integer.parseInt(inputCount.getText());
-                receipt.append(inputProductName.getText() + " " + count + "\n");
+                int count = Integer.parseInt(inputCount.getText());              //1. Antalet
+                double sum = selectedProduct.getProductPrice() * count;          //2. Summan
+                receipt.append(String.format("%-20s %2d * %7.2f = %7.2f\n",selectedProduct.getProductName(), count, selectedProduct.getProductPrice(), sum));    //3. Sriver ut raden
+
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(frame, "Skriv in heltal!");
             }
