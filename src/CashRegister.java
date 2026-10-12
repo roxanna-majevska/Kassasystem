@@ -62,10 +62,17 @@ public class CashRegister implements ActionListener {
         pepsi = new Produkt("Pepsi", 17.50);
         fanta = new Produkt("Fanta", 18.50);
 
-
-
         createReceiptArea();
+
         createQuickButtonsArea();
+        coffeeButton.addActionListener(this);
+        sugarButton.addActionListener(this);
+        flourButton.addActionListener(this);
+        chipsButton.addActionListener(this);
+        milkButton.addActionListener(this);
+        butterButton.addActionListener(this);
+        pepsiButton.addActionListener(this);
+        fantaButton.addActionListener(this);
         createAddArea();
 
         frame.getContentPane().setBackground(Color.BLACK);
@@ -119,25 +126,18 @@ public class CashRegister implements ActionListener {
 
         coffeeButton = new JButton("Kaffe");
         panel.add(coffeeButton);
-
         sugarButton = new JButton("Socker");
         panel.add(sugarButton);
-
         flourButton = new JButton("Mjöl");
         panel.add(flourButton);
-
         chipsButton = new JButton("Chips");
         panel.add(chipsButton);
-
         milkButton = new JButton("Mjölk");
         panel.add(milkButton);
-
         butterButton = new JButton("Smör");
         panel.add(butterButton);
-
         pepsiButton = new JButton("Pepsi");
         panel.add(pepsiButton);
-
         fantaButton = new JButton("Fanta");
         panel.add(fantaButton);
 
@@ -166,7 +166,11 @@ public class CashRegister implements ActionListener {
     }
 
     public void run(){
-        receipt.append("                     STEFANS SUPERSHOP\n");
+
+
+
+
+   /*     receipt.append("                     STEFANS SUPERSHOP\n");
         receipt.append("----------------------------------------------------\n");
         receipt.append("\n");
         receipt.append("Kvittonummer: 122        Datum: 2024-09-01 13:00:21\n");
@@ -175,14 +179,36 @@ public class CashRegister implements ActionListener {
         receipt.append("Nallebjörn              1 *     110.00   =   110.00  \n");
         receipt.append("Total                                        ------\n");
         receipt.append("                                             306.00\n");
-        receipt.append("TACK FÖR DITT KÖP\n");
+        receipt.append("TACK FÖR DITT KÖP\n");*/
 
     }            
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        if (e.getSource() == coffeeButton) {
+            inputProductName.setText(coffee.getProductName());
+        }
+        else if (e.getSource() == sugarButton) {
+            inputProductName.setText(sugar.getProductName());
+        }
+        else if (e.getSource() == flourButton) {
+            inputProductName.setText(flour.getProductName());
+        }
+        else if (e.getSource() == chipsButton) {
+            inputProductName.setText(chips.getProductName());
+        }
+        else if (e.getSource() == milkButton) {
+            inputProductName.setText(milk.getProductName());
+        }
+        else if (e.getSource() == butterButton) {
+            inputProductName.setText(butter.getProductName());
+        }
+        else if (e.getSource() == pepsiButton) {
+            inputProductName.setText(pepsi.getProductName());
+        }
+        else if (e.getSource() == fantaButton) {
+            inputProductName.setText(fanta.getProductName());
+        }
     }
 
     
