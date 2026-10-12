@@ -7,14 +7,7 @@ import java.awt.TextArea;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.Timer;
+import javax.swing.*;
 import java.awt.event.*;
 
 
@@ -74,6 +67,8 @@ public class CashRegister implements ActionListener {
         pepsiButton.addActionListener(this);
         fantaButton.addActionListener(this);
         createAddArea();
+        addToReceiptButton.addActionListener(this);
+
 
         frame.getContentPane().setBackground(Color.BLACK);
         frame.setSize(1000,800); 
@@ -187,29 +182,27 @@ public class CashRegister implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == coffeeButton) {
             inputProductName.setText(coffee.getProductName());
-        }
-        else if (e.getSource() == sugarButton) {
+        } else if (e.getSource() == sugarButton) {
             inputProductName.setText(sugar.getProductName());
-        }
-        else if (e.getSource() == flourButton) {
+        } else if (e.getSource() == flourButton) {
             inputProductName.setText(flour.getProductName());
-        }
-        else if (e.getSource() == chipsButton) {
+        } else if (e.getSource() == chipsButton) {
             inputProductName.setText(chips.getProductName());
-        }
-        else if (e.getSource() == milkButton) {
+        } else if (e.getSource() == milkButton) {
             inputProductName.setText(milk.getProductName());
-        }
-        else if (e.getSource() == butterButton) {
+        } else if (e.getSource() == butterButton) {
             inputProductName.setText(butter.getProductName());
-        }
-        else if (e.getSource() == pepsiButton) {
+        } else if (e.getSource() == pepsiButton) {
             inputProductName.setText(pepsi.getProductName());
-        }
-        else if (e.getSource() == fantaButton) {
+        } else if (e.getSource() == fantaButton) {
             inputProductName.setText(fanta.getProductName());
+        } else if (e.getSource() == addToReceiptButton) {
+            try {
+                int count = Integer.parseInt(inputCount.getText());
+                receipt.append(inputProductName.getText() + " " + count + "\n");
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(frame, "Skriv in heltal!");
+            }
         }
     }
-
-    
 }
