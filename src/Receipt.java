@@ -4,7 +4,13 @@ public class Receipt {
 
     private ArrayList<ReceiptRow> rows = new ArrayList<>();
 
-    public void addRow(Product item, int count) {        // Lägger en rad i listan.
+    private int receiptNumber;    // Kvittots eget numret.
+
+    public Receipt (int receiptNumber) {  // Tar emot numret.
+        this.receiptNumber = receiptNumber;
+    }
+
+    public void addRow(Product item, int count) {        // Lägger en rad i listan med ReceiptRow.
         ReceiptRow row = new ReceiptRow(item, count);
         rows.add(row);
     }
@@ -23,5 +29,9 @@ public class Receipt {
             vat = vat + row.getVatAmount();
         }
         return vat;
+    }
+
+    public int getReceiptNumber() {
+        return receiptNumber;
     }
 }
