@@ -2,10 +2,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.TextArea;
-import java.io.IOException;
-import java.io.InputStream;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -24,16 +20,16 @@ public class CashRegister implements ActionListener {
     JButton pepsiButton;
     JButton fantaButton;
 
-    Produkt coffee;
-    Produkt sugar;
-    Produkt flour;
-    Produkt chips;
-    Produkt milk;
-    Produkt butter;
-    Produkt pepsi;
-    Produkt fanta;
+    Product coffee;
+    Product sugar;
+    Product flour;
+    Product chips;
+    Product milk;
+    Product butter;
+    Product pepsi;
+    Product fanta;
 
-    Produkt selectedProduct;
+    Product selectedProduct;
 
     double totalSum;
     boolean receiptIsPaid = false;
@@ -46,14 +42,14 @@ public class CashRegister implements ActionListener {
     public CashRegister(){
         frame = new JFrame("KASSASYSTEM");
 
-        coffee = new Produkt("Kaffe", 67.50, 25);
-        sugar = new Produkt("Socker", 21.99, 25);
-        flour = new Produkt("Mjöl", 23.50, 12);
-        chips = new Produkt("Chips", 32.79, 25);
-        milk = new Produkt("Mjölk", 19.99, 12);
-        butter = new Produkt("Smör", 47.50, 12);
-        pepsi = new Produkt("Pepsi", 17.50, 25);
-        fanta = new Produkt("Fanta", 18.50, 25);
+        coffee = new Product("Kaffe", 67.50, 25);
+        sugar = new Product("Socker", 21.99, 25);
+        flour = new Product("Mjöl", 23.50, 12);
+        chips = new Product("Chips", 32.79, 25);
+        milk = new Product("Mjölk", 19.99, 12);
+        butter = new Product("Smör", 47.50, 12);
+        pepsi = new Product("Pepsi", 17.50, 25);
+        fanta = new Product("Fanta", 18.50, 25);
         createReceiptArea();
 
         createQuickButtonsArea();

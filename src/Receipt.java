@@ -4,8 +4,8 @@ public class Receipt {
 
     private ArrayList<ReceiptRow> rows = new ArrayList<>();
 
-    public void addRow(Produkt product, int count) {        // Lägger en rad i listan.
-        ReceiptRow row = new ReceiptRow(product, count);
+    public void addRow(Product item, int count) {        // Lägger en rad i listan.
+        ReceiptRow row = new ReceiptRow(item, count);
         rows.add(row);
     }
 

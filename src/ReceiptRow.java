@@ -1,13 +1,13 @@
 public class ReceiptRow {
 
-    private Produkt product;
+    private Product product;
     private int count;
 
-    public ReceiptRow (Produkt product, int count) {
+    public ReceiptRow (Product product, int count) {
         this.product = product;
         this.count = count;
     }
-    public Produkt getProduct() {
+    public Product getProduct() {
         return product;
     }
     public int getCount() {
