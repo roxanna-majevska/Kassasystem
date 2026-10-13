@@ -14,13 +14,13 @@ public class ReceiptRow {
         return count;
     }
 
-    public double getTotalBrutto()  {
+    public double getBrutto()  {
         return product.getProductPrice() * count;
     }
     public double getNetto() {
-        return getTotalBrutto() / (1.0 + product.getVatRate() / 100.0);
+        return getBrutto() / (1.0 + product.getVatRate() / 100.0);
     }
     public double getVatAmount() {
-        return getTotalBrutto() - getNetto();
+        return getBrutto() - getNetto();
     }
 }
