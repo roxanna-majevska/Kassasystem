@@ -211,7 +211,7 @@ public class CashRegister implements ActionListener {
                 JOptionPane.showMessageDialog(frame, "Skriv in heltal!");
             }
         } else if (e.getSource() == payButton) {                             // Pay grenen
-            //receipt.append(String.format("Total: %7.2f\n", currentReceipt.getTotalBrutto()));         //  Skriver ut totalen av alla rader som Receipt har räknat ihop
+            receipt.append(currentReceipt.getVatTableText());                // Lägger moms tabellen längst bak på kvittot
             receipt.append("TACK FÖR DITT KÖP!\n");
             receipt.append("VÄLKOMMEN ÅTER!\n");
             receiptIsPaid = true;                                            // Kunden har betalat

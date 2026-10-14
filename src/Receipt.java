@@ -47,4 +47,17 @@ public class Receipt {
         text = text + String.format(" Total: %7.2f\n", getTotalBrutto());
         return text;
     }
+    public String getVatTableText() {
+        String text = "Moms %   Moms    Netto    Brutto\n";
+        for (ReceiptRow row : rows) {
+            text  = text  + String.format("%6.1f %8.2f %8.2f %8.2f\n",
+                    row.getProduct().getVatRate(), // Moms %
+                    row.getVatAmount(),            // Moms för raden
+                    row.getNetto(),                // Netto
+                    row.getBrutto());              // Brutto
+        }
+        return text;
+
+    }
+
 }
