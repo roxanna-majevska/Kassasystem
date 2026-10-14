@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Receipt {
@@ -9,6 +11,7 @@ public class Receipt {
     public Receipt (int receiptNumber) {  // Tar emot numret.
         this.receiptNumber = receiptNumber;
     }
+    private LocalDateTime dateTime = LocalDateTime.now();
 
     public void addRow(Product item, int count) {        // Lägger en rad i listan med ReceiptRow.
         ReceiptRow row = new ReceiptRow(item, count);
@@ -36,7 +39,8 @@ public class Receipt {
     }
 
     public String getReceiptText() {
-        String text = "Kvitto nr " + receiptNumber  + "\n";
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String text = "Kvitto nr " + receiptNumber  + "      Datum: " + dateTime.format(format) + "\n \n";
         for (ReceiptRow row : rows) {
             text = text + String.format("%-20s %2d * %7.2f = %7.2f\n",
                     row.getProduct().getProductName(),
@@ -48,7 +52,7 @@ public class Receipt {
         return text;
     }
     public String getVatTableText() {
-        String text = "Moms %   Moms    Netto    Brutto\n";
+        String text = "\n Moms %   Moms    Netto    Brutto\n";
         for (ReceiptRow row : rows) {
             text  = text  + String.format("%6.1f %8.2f %8.2f %8.2f\n",
                     row.getProduct().getVatRate(), // Moms %

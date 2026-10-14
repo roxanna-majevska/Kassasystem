@@ -212,7 +212,7 @@ public class CashRegister implements ActionListener {
             }
         } else if (e.getSource() == payButton) {                             // Pay grenen
             receipt.append(currentReceipt.getVatTableText());                // Lägger moms tabellen längst bak på kvittot
-            receipt.append("TACK FÖR DITT KÖP!\n");
+            receipt.append("\nTACK FÖR DITT KÖP!\n");
             receipt.append("VÄLKOMMEN ÅTER!\n");
             receiptIsPaid = true;                                            // Kunden har betalat
             nextReceiptNumber = nextReceiptNumber + 1;                       // Räknar upp nr med 1
