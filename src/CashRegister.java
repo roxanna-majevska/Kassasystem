@@ -34,6 +34,9 @@ public class CashRegister implements ActionListener {
     double totalSum;
     boolean receiptIsPaid = false;
 
+    Receipt currentReceipt;
+    int  nextReceiptNumber = 1;
+
     JTextArea inputProductName;
     JTextArea inputCount;
     JButton addToReceiptButton;
@@ -52,6 +55,9 @@ public class CashRegister implements ActionListener {
         fanta = new Product("Fanta", 18.50, 25);
         createReceiptArea();
 
+
+        currentReceipt =  new Receipt(nextReceiptNumber);
+
         createQuickButtonsArea();
         coffeeButton.addActionListener(this);
         sugarButton.addActionListener(this);
@@ -62,9 +68,9 @@ public class CashRegister implements ActionListener {
         pepsiButton.addActionListener(this);
         fantaButton.addActionListener(this);
 
-        createAddArea();                               // 1. Add och Pay skapas här.
-        addToReceiptButton.addActionListener(this); // 2. Sen får Add lyssna
-        payButton.addActionListener(this);          // 3. och pay får lyssna
+        createAddArea();                               //  Add och Pay skapas här,
+        addToReceiptButton.addActionListener(this); //  sen får Add lyssna
+        payButton.addActionListener(this);          //  och Pay får lyssna.
 
 
         frame.getContentPane().setBackground(Color.BLACK);
@@ -75,6 +81,7 @@ public class CashRegister implements ActionListener {
         frame.setLayout(null);
 
         frame.setVisible(true);
+
     }
 
     private void createAddArea(){
@@ -191,26 +198,29 @@ public class CashRegister implements ActionListener {
         } else if (e.getSource() == addToReceiptButton) {
             if (receiptIsPaid) {
                 receipt.setText("");
-                receiptIsPaid = false;                                           //8. Kvittot töms, redo för nästa köp (Add-grenen)
+                receiptIsPaid = false;                                           // Kvittot töms, redo för nästa köp (Add-grenen)
             }
             if (selectedProduct == null) {
                 JOptionPane.showMessageDialog(frame, "Vänligen välj en produkt först!");
                 return;         // går ur actionPerformed, kör inget mer
             }
             try {       //  hit kommer bara om hyllan har en produkt
-                int count = Integer.parseInt(inputCount.getText());              //1. Antalet
-                double sum = selectedProduct.getProductPrice() * count;          //2. Summan
-                totalSum = totalSum + sum;                                       //3. Totalen
-                receipt.append(String.format("%-20s %2d * %7.2f = %7.2f\n",selectedProduct.getProductName(), count, selectedProduct.getProductPrice(), sum));    //4. Skriver ut produkten
+                int count = Integer.parseInt(inputCount.getText());              // Antalet
+                currentReceipt.addRow(selectedProduct, count);                   // Lägger en rad med vald produkt och antalet i kvittot
+                double sum = selectedProduct.getProductPrice() * count;          // Summan
+                totalSum = totalSum + sum;                                       // (Totalen)
+                receipt.append(String.format("%-20s %2d * %7.2f = %7.2f\n",selectedProduct.getProductName(), count, selectedProduct.getProductPrice(), sum));    // Skriver ut raden
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(frame, "Skriv in heltal!");
             }
         } else if (e.getSource() == payButton) {
-            receipt.append(String.format("Total: %7.2f\n", totalSum));         //5.  Skriver ut totalen
+            receipt.append(String.format("Total: %7.2f\n", currentReceipt.getTotalBrutto()));         //  Skriver ut totalen av alla rader som Receipt har räknat ihop
             receipt.append("TACK FÖR DITT KÖP!\n");
             receipt.append("VÄLKOMMEN ÅTER!\n");
-            totalSum  = 0;                                                    //6. Nollställer
-            receiptIsPaid = true;                                             //7. Kunden har betalat (Pay-grenen)
+            totalSum  = 0;                                                   // Nollställer
+            receiptIsPaid = true;                                            // Kunden har betalat (Pay-grenen)
+            nextReceiptNumber = nextReceiptNumber + 1;                       // Räknar upp nr med 1
+            currentReceipt = new Receipt(nextReceiptNumber);                 // Bygger ett nytt kvitto med det nya numret
         }
     }
 }
