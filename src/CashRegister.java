@@ -194,10 +194,10 @@ public class CashRegister implements ActionListener {
         } else if (e.getSource() == fantaButton) {
             inputProductName.setText(fanta.getProductName());
             selectedProduct = fanta;
-        } else if (e.getSource() == addToReceiptButton) {
+        } else if (e.getSource() == addToReceiptButton) {                         // Add grenen
             if (receiptIsPaid) {
                 receipt.setText("");
-                receiptIsPaid = false;                                           // Kvittot töms, redo för nästa köp (Add-grenen)
+                receiptIsPaid = false;                                           // Kvittot töms, redo för nästa köp
             }
             if (selectedProduct == null) {
                 JOptionPane.showMessageDialog(frame, "Vänligen välj en produkt först!");
@@ -206,16 +206,15 @@ public class CashRegister implements ActionListener {
             try {       //  hit kommer bara om hyllan har en produkt
                 int count = Integer.parseInt(inputCount.getText());              // Antalet
                 currentReceipt.addRow(selectedProduct, count);                   // Lägger en rad med vald produkt och antalet i kvittot
-                double sum = selectedProduct.getProductPrice() * count;          // Summan
-                receipt.append(String.format("%-20s %2d * %7.2f = %7.2f\n",selectedProduct.getProductName(), count, selectedProduct.getProductPrice(), sum));    // Skriver ut raden
+                receipt.setText(currentReceipt.getReceiptText());  // Lägger hela kvittot i rutan och byter ut hela texten som stod där förut
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(frame, "Skriv in heltal!");
             }
-        } else if (e.getSource() == payButton) {
-            receipt.append(String.format("Total: %7.2f\n", currentReceipt.getTotalBrutto()));         //  Skriver ut totalen av alla rader som Receipt har räknat ihop
+        } else if (e.getSource() == payButton) {                             // Pay grenen
+            //receipt.append(String.format("Total: %7.2f\n", currentReceipt.getTotalBrutto()));         //  Skriver ut totalen av alla rader som Receipt har räknat ihop
             receipt.append("TACK FÖR DITT KÖP!\n");
             receipt.append("VÄLKOMMEN ÅTER!\n");
-            receiptIsPaid = true;                                            // Kunden har betalat (Pay-grenen)
+            receiptIsPaid = true;                                            // Kunden har betalat
             nextReceiptNumber = nextReceiptNumber + 1;                       // Räknar upp nr med 1
             currentReceipt = new Receipt(nextReceiptNumber);                 // Bygger ett nytt kvitto med det nya numret
         }

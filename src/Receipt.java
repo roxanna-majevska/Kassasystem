@@ -34,4 +34,17 @@ public class Receipt {
     public int getReceiptNumber() {
         return receiptNumber;
     }
+
+    public String getReceiptText() {
+        String text = "Kvitto nr " + receiptNumber  + "\n";
+        for (ReceiptRow row : rows) {
+            text = text + String.format("%-20s %2d * %7.2f = %7.2f\n",
+                    row.getProduct().getProductName(),
+                    row.getCount(),
+                    row.getProduct().getProductPrice(),
+                    row.getBrutto());
+        }
+        text = text + String.format(" Total: %7.2f\n", getTotalBrutto());
+        return text;
+    }
 }
