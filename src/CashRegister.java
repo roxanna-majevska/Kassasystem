@@ -31,7 +31,6 @@ public class CashRegister implements ActionListener {
 
     Product selectedProduct;
 
-    double totalSum;
     boolean receiptIsPaid = false;
 
     Receipt currentReceipt;
@@ -208,7 +207,6 @@ public class CashRegister implements ActionListener {
                 int count = Integer.parseInt(inputCount.getText());              // Antalet
                 currentReceipt.addRow(selectedProduct, count);                   // Lägger en rad med vald produkt och antalet i kvittot
                 double sum = selectedProduct.getProductPrice() * count;          // Summan
-                totalSum = totalSum + sum;                                       // (Totalen)
                 receipt.append(String.format("%-20s %2d * %7.2f = %7.2f\n",selectedProduct.getProductName(), count, selectedProduct.getProductPrice(), sum));    // Skriver ut raden
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(frame, "Skriv in heltal!");
@@ -217,7 +215,6 @@ public class CashRegister implements ActionListener {
             receipt.append(String.format("Total: %7.2f\n", currentReceipt.getTotalBrutto()));         //  Skriver ut totalen av alla rader som Receipt har räknat ihop
             receipt.append("TACK FÖR DITT KÖP!\n");
             receipt.append("VÄLKOMMEN ÅTER!\n");
-            totalSum  = 0;                                                   // Nollställer
             receiptIsPaid = true;                                            // Kunden har betalat (Pay-grenen)
             nextReceiptNumber = nextReceiptNumber + 1;                       // Räknar upp nr med 1
             currentReceipt = new Receipt(nextReceiptNumber);                 // Bygger ett nytt kvitto med det nya numret
