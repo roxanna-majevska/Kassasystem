@@ -113,8 +113,8 @@ public class CashRegister implements ActionListener {
     private void createQuickButtonsArea() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING, 5, 5));
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        panel.setBackground(Color.green);
-        panel.setPreferredSize(new Dimension(600, 600));
+        panel.setBackground(Color.lightGray);
+        panel.setPreferredSize(new Dimension(400, 600));
 
         coffeeButton = new JButton("Kaffe");
         panel.add(coffeeButton);
@@ -204,16 +204,16 @@ public class CashRegister implements ActionListener {
                 return;         // går ur actionPerformed, kör inget mer
             }
             try {       //  hit kommer bara om hyllan har en produkt
-                int count = Integer.parseInt(inputCount.getText());              // Antalet
-                currentReceipt.addRow(selectedProduct, count);                   // Lägger en rad med vald produkt och antalet i kvittot
+                int count = Integer.parseInt(inputCount.getText());            // Antalet
+                currentReceipt.addRow(selectedProduct, count);                 // Lägger en rad med vald produkt och antalet i kvittot
                 receipt.setText(currentReceipt.getReceiptText());  // Lägger hela kvittot i rutan och byter ut hela texten som stod där förut
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(frame, "Skriv in heltal!");
             }
         } else if (e.getSource() == payButton) {                             // Pay grenen
             receipt.append(currentReceipt.getVatTableText());                // Lägger moms tabellen längst bak på kvittot
-            receipt.append("\nTACK FÖR DITT KÖP!\n");
-            receipt.append("VÄLKOMMEN ÅTER!\n");
+            receipt.append("\n" + String.format("%28s\n", "TACK FÖR DITT KÖP!"));
+            receipt.append(String.format("%26s\n", "VÄLKOMMEN ÅTER!"));
             receiptIsPaid = true;                                            // Kunden har betalat
             nextReceiptNumber = nextReceiptNumber + 1;                       // Räknar upp nr med 1
             currentReceipt = new Receipt(nextReceiptNumber);                 // Bygger ett nytt kvitto med det nya numret
